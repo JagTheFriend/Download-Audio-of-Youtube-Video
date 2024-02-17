@@ -1,6 +1,8 @@
 import Head from "next/head";
+import { useEffect } from "react";
 import { useDebounceValue } from "usehooks-ts";
 import { Input } from "~/components/ui/input";
+import { api } from "~/utils/api";
 
 function Header() {
   return (
@@ -14,6 +16,14 @@ function Header() {
 
 function InputField() {
   const [songName, setSongName] = useDebounceValue("", 500);
+  const songsQuery = api.yt.searchSong.useQuery({ songName });
+
+  useEffect(() => {
+    if (songName) {
+      songsQuery.refetch();
+    }
+  }, [songName, songsQuery.refetch]);
+
   return (
     <div className="flex flex-col items-center justify-center gap-2">
       <Input
