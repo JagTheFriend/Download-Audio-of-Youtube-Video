@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { searchSong } from "~/lib/utils";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
