@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useDebounceValue } from "usehooks-ts";
 import { Input } from "~/components/ui/input";
 
 function Header() {
@@ -12,9 +13,15 @@ function Header() {
 }
 
 function InputField() {
+  const [songName, setSongName] = useDebounceValue("", 500);
   return (
     <div className="flex flex-col items-center justify-center gap-2">
-      <Input type="text" placeholder="Enter Song Name" className="w-7/12" />
+      <Input
+        type="text"
+        placeholder="Enter Song Name"
+        className="w-7/12"
+        onChange={(e) => setSongName(e.target.value)}
+      />
       <SearchButton />
     </div>
   );

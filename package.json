@@ -26,6 +26,7 @@
     "superjson": "^2.2.1",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
+    "usehooks-ts": "^2.14.0",
     "ytdl-core": "^4.11.5",
     "zod": "^3.22.4"
   },
