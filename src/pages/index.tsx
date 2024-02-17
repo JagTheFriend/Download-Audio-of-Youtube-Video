@@ -22,16 +22,10 @@ function InputField() {
         className="w-7/12"
         onChange={(e) => setSongName(e.target.value)}
       />
-      <SearchButton />
+      <button disabled={!songName} className="custom-btn btn-3" type="button">
+        <span>Search</span>
+      </button>
     </div>
-  );
-}
-
-function SearchButton() {
-  return (
-    <button className="custom-btn btn-3" type="button">
-      <span>Search</span>
-    </button>
   );
 }
 
