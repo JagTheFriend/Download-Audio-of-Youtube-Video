@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useDebounceValue } from "usehooks-ts";
+import LoadingSpinner from "~/components/LoadingSpinner";
 import { Input } from "~/components/ui/input";
 import { DataToSend } from "~/lib/type";
 import { api } from "~/utils/api";
@@ -32,26 +33,33 @@ function InputField() {
     if (songsQuery.data) {
       setResponseData(songsQuery.data);
     }
-    if (songsQuery.isError) {
+  }, [songsQuery.data]);
+
+  useEffect(() => {
+    if (songsQuery.error) {
       setIsError(true);
     }
-    if (songsQuery.isLoading) {
-      setIsLoading(true);
-    }
-  }, [songsQuery.data, songsQuery.isError, songsQuery.isLoading]);
+  }, [songsQuery.error]);
+
+  useEffect(() => {
+    setIsLoading(songsQuery.isLoading);
+  }, [songsQuery.isLoading]);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-2">
-      <Input
-        type="text"
-        placeholder="Enter Song Name"
-        className="w-7/12"
-        onChange={(e) => setSongName(e.target.value)}
-      />
-      <button disabled={!songName} className="custom-btn btn-3" type="button">
-        <span>Search</span>
-      </button>
-    </div>
+    <>
+      <div className="flex flex-col items-center justify-center gap-2">
+        <Input
+          type="text"
+          placeholder="Enter Song Name"
+          className="w-7/12"
+          onChange={(e) => setSongName(e.target.value)}
+        />
+        <button disabled={!songName} className="custom-btn btn-3" type="button">
+          <span>Search</span>
+        </button>
+      </div>
+      <div>{isLoading && <LoadingSpinner spinnerColor="blue" />} </div>
+    </>
   );
 }
 
