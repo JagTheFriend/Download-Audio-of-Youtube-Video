@@ -2,31 +2,11 @@ import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
-let post = {
-  id: 1,
-  name: "Hello World",
-};
-
 export const ytRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
-    }),
-
-  create: publicProcedure
-    .input(z.object({ name: z.string().min(1) }))
+  searchSong: publicProcedure
+    .input(z.object({ songName: z.string().min(1) }))
     .mutation(async ({ input }) => {
-      // simulate a slow db call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      post = { id: post.id + 1, name: input.name };
-      return post;
+      const dataToSend = await searchSong(input.songName);
+      return dataToSend;
     }),
-
-  getLatest: publicProcedure.query(() => {
-    return post;
-  }),
 });
