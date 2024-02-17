@@ -47,7 +47,7 @@ function InputField() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center gap-2">
+      <div className="mb-4 flex flex-col items-center justify-center gap-2">
         <Input
           type="text"
           placeholder="Enter Song Name"
@@ -58,7 +58,14 @@ function InputField() {
           <span>Search</span>
         </button>
       </div>
-      <div>{isLoading && <LoadingSpinner spinnerColor="blue" />} </div>
+      <div className="flex cursor-default justify-center gap-4">
+        {isLoading && <LoadingSpinner spinnerColor="blue" />}
+        {isError && !isLoading && (
+          <p className="text-lg text-red-400 transition-all hover:text-red-500">
+            Something went wrong
+          </p>
+        )}
+      </div>
     </>
   );
 }
