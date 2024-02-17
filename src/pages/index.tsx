@@ -3,7 +3,7 @@ import { Input } from "~/components/ui/input";
 
 function Header() {
   return (
-    <div className="m-2 flex w-full flex-col items-center justify-center">
+    <div className="m-2 mb-4 flex w-full flex-col items-center justify-center">
       <h2 className="cursor-pointer border-b-2 text-2xl transition-all hover:border-b-blue-500">
         Download audio of Youtube videos for free
       </h2>
