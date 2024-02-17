@@ -1,7 +1,8 @@
 import Head from "next/head";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDebounceValue } from "usehooks-ts";
 import { Input } from "~/components/ui/input";
+import { DataToSend } from "~/lib/type";
 import { api } from "~/utils/api";
 
 function Header() {
@@ -16,6 +17,9 @@ function Header() {
 
 function InputField() {
   const [songName, setSongName] = useDebounceValue("", 500);
+  const [responseData, setResponseData] = useState<DataToSend[]>([]);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const songsQuery = api.yt.searchSong.useQuery({ songName });
 
   useEffect(() => {
@@ -23,6 +27,18 @@ function InputField() {
       songsQuery.refetch();
     }
   }, [songName, songsQuery.refetch]);
+
+  useEffect(() => {
+    if (songsQuery.data) {
+      setResponseData(songsQuery.data);
+    }
+    if (songsQuery.isError) {
+      setIsError(true);
+    }
+    if (songsQuery.isLoading) {
+      setIsLoading(true);
+    }
+  }, [songsQuery.data, songsQuery.isError, songsQuery.isLoading]);
 
   return (
     <div className="flex flex-col items-center justify-center gap-2">
