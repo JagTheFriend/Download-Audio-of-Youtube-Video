@@ -1,5 +1,27 @@
 import Head from "next/head";
 
+function Header() {
+  return (
+    <div className="m-2 flex w-full flex-col items-center justify-center">
+      <h2 className="cursor-pointer border-b-2 text-2xl transition-all hover:border-b-blue-500">
+        Download audio of Youtube videos for free
+      </h2>
+    </div>
+  );
+}
+
+function InputField() {
+  return <></>;
+}
+
+function SearchButton() {
+  return (
+    <button className="custom-btn btn-3" type="button">
+      <span>Search</span>
+    </button>
+  );
+}
+
 export default function Home() {
   return (
     <>
@@ -9,11 +31,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="min-w-screen flex max-h-full min-h-screen max-w-full flex-col">
-        <div className="flex w-full items-center justify-center">
-          <h2 className="m-2 cursor-pointer border-b-2 text-2xl transition-all hover:border-b-blue-500">
-            Download audio of Youtube videos for free
-          </h2>
-        </div>
+        <Header />
+        <InputField />
+        <SearchButton />
       </main>
     </>
   );
