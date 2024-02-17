@@ -1,7 +1,153 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
+:root {
+  --bg-color: white;
+  --typewriterSpeed: 3s;
+  --typewriterCharacters: 24;
+}
+
+h2 {
+  text-align: center;
+  position: relative;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+h2::before,
+h2::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+h2::before {
+  background: var(--bg-color);
+  color: white;
+  -webkit-animation: typewriter var(--typewriterSpeed) steps(var(--typewriterCharacters)) 1s forwards;
+  animation: typewriter var(--typewriterSpeed) steps(var(--typewriterCharacters)) 1s forwards;
+}
+
+h2::after {
+  width: 0.1rem;
+  background: black;
+  -webkit-animation: typewriter var(--typewriterSpeed) steps(var(--typewriterCharacters)) 1s forwards,
+    blink 750ms steps(var(--typewriterCharacters)) infinite;
+  animation: typewriter var(--typewriterSpeed) steps(var(--typewriterCharacters)) 1s forwards,
+    blink 750ms steps(var(--typewriterCharacters)) infinite;
+}
+
+@-webkit-keyframes typewriter {
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes typewriter {
+  to {
+    left: 100%;
+  }
+}
+@-webkit-keyframes blink {
+  to {
+    background: transparent;
+  }
+}
+@keyframes blink {
+  to {
+    background: transparent;
+  }
+}
+.custom-btn {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5), 7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+.btn-3 {
+  background: rgb(0, 172, 238);
+  background: linear-gradient(0deg, rgba(0, 172, 238, 1) 0%, rgba(2, 126, 251, 1) 100%);
+  width: 130px;
+  height: 40px;
+  line-height: 42px;
+  padding: 0;
+  border: none;
+}
+.btn-3 span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.btn-3:before,
+.btn-3:after {
+  position: absolute;
+  content: '';
+  right: 0;
+  top: 0;
+  background: rgba(2, 126, 251, 1);
+  transition: all 0.3s ease;
+}
+.btn-3:before {
+  height: 0%;
+  width: 2px;
+}
+.btn-3:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-3:hover {
+  background: transparent;
+  box-shadow: none;
+}
+.btn-3:hover:before {
+  height: 100%;
+}
+.btn-3:hover:after {
+  width: 100%;
+}
+.btn-3 span:hover {
+  color: rgba(2, 126, 251, 1);
+}
+.btn-3 span:before,
+.btn-3 span:after {
+  position: absolute;
+  content: '';
+  left: 0;
+  bottom: 0;
+  background: rgba(2, 126, 251, 1);
+  transition: all 0.3s ease;
+}
+.btn-3 span:before {
+  width: 2px;
+  height: 0%;
+}
+.btn-3 span:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-3 span:hover:before {
+  height: 100%;
+}
+.btn-3 span:hover:after {
+  width: 100%;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -9,63 +155,63 @@
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
- 
+
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
- 
+
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
- 
+
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
- 
+
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
- 
+
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
- 
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
- 
+
     --radius: 0.5rem;
   }
- 
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
- 
+
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
- 
+
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
- 
+
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
- 
+
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
- 
+
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
- 
+
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
- 
+
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
- 
+
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
