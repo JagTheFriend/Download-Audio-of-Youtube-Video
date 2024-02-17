@@ -1,3 +1,6 @@
+export const videoFinderUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${process.env.YOUTUBE_API_KEY}&type=video&maxResults=18&q=`;
+export const validityCheckUrl = `https://www.googleapis.com/youtube/v3/videos?part=id&key=${process.env.YOUTUBE_API_KEY}&id=`;
+
 export interface VideoFormat {
   nextPageToken: string;
   videoId: string;
