@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Input } from "~/components/ui/input";
 
 function Header() {
   return (
@@ -11,7 +12,12 @@ function Header() {
 }
 
 function InputField() {
-  return <></>;
+  return (
+    <div className="flex flex-col items-center justify-center gap-2">
+      <Input type="text" placeholder="Enter Song Name" className="w-7/12" />
+      <SearchButton />
+    </div>
+  );
 }
 
 function SearchButton() {
@@ -33,7 +39,6 @@ export default function Home() {
       <main className="min-w-screen flex max-h-full min-h-screen max-w-full flex-col">
         <Header />
         <InputField />
-        <SearchButton />
       </main>
     </>
   );
