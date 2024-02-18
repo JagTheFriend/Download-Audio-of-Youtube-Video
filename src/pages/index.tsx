@@ -54,7 +54,12 @@ function InputField() {
           className="w-7/12"
           onChange={(e) => setSongName(e.target.value.trim())}
         />
-        <button disabled={!songName} className="custom-btn btn-3" type="button">
+        <button
+          disabled={!songName}
+          onClick={() => songsQuery.refetch()}
+          className="custom-btn btn-3"
+          type="button"
+        >
           <span>Search</span>
         </button>
       </div>
