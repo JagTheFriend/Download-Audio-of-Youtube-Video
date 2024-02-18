@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useDebounceValue } from "usehooks-ts";
 import LoadingSpinner from "~/components/LoadingSpinner";
+import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { DataToSend } from "~/lib/type";
 import { api } from "~/utils/api";
@@ -31,7 +32,7 @@ function DisplayResults({ data }: { data: DataToSend[] }) {
     <>
       {chunkedData.map((chunk) => {
         return (
-          <div key={`${Math.random()}`} className="m-1 flex flex-row gap-4">
+          <div key={`${Math.random()}`} className="m-1 flex flex-row gap-2">
             {chunk.map((data) => {
               return (
                 <div
@@ -54,48 +55,41 @@ function DisplayResults({ data }: { data: DataToSend[] }) {
                     <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                       {data.description}
                     </p>
-                    <div className="flex flex-col">
-                      <a
-                        href={`https://www.youtube.com/watch?v=${data.videoId}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    <div className="flex flex-col gap-4">
+                      <Button
+                        variant={"outline"}
+                        className="mt-2 inline-flex items-center rounded-lg"
+                        asChild
                       >
-                        Watch Video
-                        <svg
-                          className="ms-2 h-3.5 w-3.5 rtl:rotate-180"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 14 10"
+                        <a
+                          href={`https://www.youtube.com/watch?v=${data.videoId}`}
+                          target="_blank"
+                          rel="noreferrer"
                         >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M1 5h12m0 0L9 1m4 4L9 9"
-                          />
-                        </svg>
-                      </a>
-                      <button className="mt-2 inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                          Watch Video
+                          <svg
+                            className="ms-2 h-3.5 w-3.5 rtl:rotate-180"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 14 10"
+                          >
+                            <path
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M1 5h12m0 0L9 1m4 4L9 9"
+                            />
+                          </svg>
+                        </a>
+                      </Button>
+                      <Button
+                        variant={"outline"}
+                        className="inline-flex items-center rounded-lg"
+                      >
                         Download MP3
-                        <svg
-                          className="ms-2 h-3.5 w-3.5 rtl:rotate-180"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 14 10"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M1 5h12m0 0L9 1m4 4L9 9"
-                          />
-                        </svg>
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 </div>
