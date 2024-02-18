@@ -78,12 +78,7 @@ function DisplayResults({ data }: { data: DataToSend[] }) {
                           />
                         </svg>
                       </a>
-                      <a
-                        href={`https://www.youtube.com/watch?v=${data.videoId}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="mt-2 inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                      >
+                      <button className="mt-2 inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Download MP3
                         <svg
                           className="ms-2 h-3.5 w-3.5 rtl:rotate-180"
@@ -100,7 +95,7 @@ function DisplayResults({ data }: { data: DataToSend[] }) {
                             d="M1 5h12m0 0L9 1m4 4L9 9"
                           />
                         </svg>
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>
