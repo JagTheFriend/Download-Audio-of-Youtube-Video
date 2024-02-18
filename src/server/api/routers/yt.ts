@@ -11,4 +11,10 @@ export const ytRouter = createTRPCRouter({
       const dataToSend = await searchSong(input.songName);
       return dataToSend;
     }),
+
+  downloadAudio: publicProcedure
+    .input(z.object({ fileName: z.string(), songId: z.string() }))
+    .query(({ input, ctx }) => {
+      ctx.res;
+    }),
 });
