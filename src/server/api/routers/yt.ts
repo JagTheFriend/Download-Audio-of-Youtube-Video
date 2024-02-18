@@ -8,7 +8,7 @@ export const ytRouter = createTRPCRouter({
   searchSong: publicProcedure
     .input(z.object({ songName: z.string() }))
     .query(async ({ input }) => {
-      if (input.songName.length === 0) return;
+      if (input.songName.length === 0) return [];
       const dataToSend = await searchSong(input.songName);
       return dataToSend;
     }),
