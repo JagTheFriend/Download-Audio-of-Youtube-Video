@@ -67,16 +67,20 @@ function DisplayResults({ data }: { data: DataToSend[] }) {
               return (
                 <div
                   key={`${Math.random()}`}
-                  className="flex max-w-sm transform flex-col rounded-lg border border-gray-200 bg-white shadow transition duration-500 hover:z-10 hover:scale-110 dark:border-gray-700 dark:bg-gray-800"
+                  className={`
+                  flex max-w-sm transform flex-col rounded-lg border
+                  border-gray-200 bg-white
+                  transition duration-500
+                  hover:z-10 hover:scale-110`}
                 >
                   <CardImage thumbnailLink={data.thumbnailLink} />
                   <div className="p-5">
                     <CardTitle title={data.title} />
                     <CardDescription description={data.description} />
-                    <div className="flex flex-col gap-4">
+                    <div className="mt-2 flex flex-col gap-4">
                       <Button
                         variant={"outline"}
-                        className="mt-2 inline-flex items-center rounded-lg"
+                        className="inline-flex items-center rounded-lg"
                         asChild
                       >
                         <Link
