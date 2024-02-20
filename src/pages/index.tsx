@@ -59,28 +59,29 @@ function DisplayResults({ data }: { data: DataToSend[] }) {
         fileName: selectedVid.fileName,
       })
       .then((response) => {
-        // create file link in browser's memory
-        const href = URL.createObjectURL(response.data);
-        let fileName = "music";
+        const binaryData = [];
+        binaryData.push(response.data);
 
+        // create file link in browser's memory
+        const href = URL.createObjectURL(
+          new Blob(binaryData, { type: "audio/mp3" }),
+        );
+
+        let fileName = "music.mp3";
         const contentDisposition = response.headers["content-disposition"];
-        console.log(contentDisposition);
 
         if (contentDisposition) {
           // Filename sent by server
           const receivedFileName = contentDisposition.match(/filename="(.+)"/);
-          console.log(receivedFileName);
           if (receivedFileName.length === 2) {
             fileName = receivedFileName[1];
           }
         }
 
-        console.log(fileName);
-
         // create "a" HTML element with href to file & click
         const link = document.createElement("a");
         link.href = href;
-        link.setAttribute("download", `${fileName}.mp3"`);
+        link.setAttribute("download", `${fileName}`);
         document.body.appendChild(link);
         link.click();
 
