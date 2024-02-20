@@ -15,6 +15,9 @@ export async function searchSong(songName: string): Promise<DataToSend[]> {
   const response = await fetch(videoFinderUrl + songName);
   const data: ResponseReceived = <ResponseReceived>await response.json();
   const dataToSend: VideoFormat[] = [];
+
+  if (dataToSend.length === 0) return [];
+
   for (const key of data.items) {
     dataToSend.push({
       nextPageToken: data.nextPageToken,
