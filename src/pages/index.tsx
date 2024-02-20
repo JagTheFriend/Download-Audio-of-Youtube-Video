@@ -187,7 +187,15 @@ function InputField() {
   const [responseData, setResponseData] = useState<DataToSend[]>([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const songsQuery = api.yt.searchSong.useQuery({ songName });
+  const songsQuery = api.yt.searchSong.useQuery(
+    { songName },
+    {
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+      refetchIntervalInBackground: false,
+      refetchOnReconnect: false,
+    },
+  );
 
   useEffect(() => {
     if (songName) {
