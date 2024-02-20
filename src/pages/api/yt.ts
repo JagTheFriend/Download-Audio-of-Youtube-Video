@@ -7,14 +7,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const id: string = req.body.songId;
   const fileName: string = req.body.fileName;
 
-  console.log(id);
-  console.log(fileName);
-
   res.setHeader(
     "Content-Disposition",
     `attachment; filename="${fileName.replace(/[^\x00-\x7F]/g, "")}.mp3"`,
   );
-  return Promise.resolve(
+
+  Promise.resolve(
     ytdl(`https://www.youtube.com/watch?v=${id}`, {
       filter: "audioonly",
       requestOptions: { timeout: 360 },
