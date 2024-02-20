@@ -6,7 +6,7 @@ import { useDebounceValue } from "usehooks-ts";
 import LoadingSpinner from "~/components/LoadingSpinner";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import { DataToSend } from "~/lib/type";
+import { type DataToSend } from "~/lib/type";
 import { api } from "~/utils/api";
 
 function Header() {
@@ -158,9 +158,9 @@ function InputField() {
 
   useEffect(() => {
     if (songName) {
-      songsQuery.refetch();
+      void songsQuery.refetch();
     }
-  }, [songName, songsQuery.refetch]);
+  }, [songName, songsQuery]);
 
   useEffect(() => {
     if (songsQuery.data) {

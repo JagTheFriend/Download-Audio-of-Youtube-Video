@@ -1,10 +1,10 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import {
-  DataToSend,
-  ResponseReceived,
-  VideoFormat,
   videoFinderUrl,
+  type DataToSend,
+  type ResponseReceived,
+  type VideoFormat,
 } from "./type";
 
 export function cn(...inputs: ClassValue[]) {
@@ -13,7 +13,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export async function searchSong(songName: string): Promise<DataToSend[]> {
   const response = await fetch(videoFinderUrl + songName);
-  const data: ResponseReceived = <ResponseReceived>await response.json();
+  const data: ResponseReceived = (await response.json()) as ResponseReceived;
   const dataToSend: VideoFormat[] = [];
 
   if (!data.items) return [];
