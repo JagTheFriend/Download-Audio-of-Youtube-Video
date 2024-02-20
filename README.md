@@ -7,7 +7,7 @@ Downloading videos from YouTube is against the YouTube Policy. The only videos t
 ---
 
 This is a simple app where you could download audio of any youtube video\ .
-Please visit the [website]() on a laptop since it isn't mobile friendly yet.
+Please visit the [website](https://download-audio-of-youtube-video.vercel.app/) on a laptop since it isn't mobile friendly yet.
 
 ## Tech Used
 
