@@ -215,7 +215,7 @@ export default function Home() {
       <Head>
         <title>Download MP3</title>
         <meta name="description" content="Download MP3 files" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.svg" />
       </Head>
       <main className="min-w-screen flex max-h-full min-h-screen max-w-full flex-col">
         <Header />
