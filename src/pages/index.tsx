@@ -41,7 +41,7 @@ function CardTitle({ title }: { title: string }) {
 
 function CardDescription({ description }: { description: string }) {
   return (
-    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+    <p className="mb-3 cursor-default font-normal text-gray-700 dark:text-gray-400">
       {description}
     </p>
   );
