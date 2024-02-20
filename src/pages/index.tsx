@@ -61,11 +61,26 @@ function DisplayResults({ data }: { data: DataToSend[] }) {
       .then((response) => {
         // create file link in browser's memory
         const href = URL.createObjectURL(response.data);
+        let fileName = "music";
+
+        const contentDisposition = response.headers["content-disposition"];
+        console.log(contentDisposition);
+
+        if (contentDisposition) {
+          // Filename sent by server
+          const receivedFileName = contentDisposition.match(/filename="(.+)"/);
+          console.log(receivedFileName);
+          if (receivedFileName.length === 2) {
+            fileName = receivedFileName[1];
+          }
+        }
+
+        console.log(fileName);
 
         // create "a" HTML element with href to file & click
         const link = document.createElement("a");
         link.href = href;
-        link.setAttribute("download", "file.pdf"); //or any other extension
+        link.setAttribute("download", `${fileName}.mp3"`);
         document.body.appendChild(link);
         link.click();
 
