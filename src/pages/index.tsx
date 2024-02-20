@@ -48,6 +48,14 @@ function CardDescription({ description }: { description: string }) {
 }
 
 function DisplayResults({ data }: { data: DataToSend[] }) {
+  const [selectedVid, setSelectedVid] = useState({ songId: "", fileName: "" });
+  const downloadAudioQuery = api.yt.downloadAudio.useQuery(selectedVid);
+
+  useEffect(() => {
+    if (selectedVid.songId.length === 0) return;
+    downloadAudioQuery.refetch();
+  }, [selectedVid, downloadAudioQuery.refetch]);
+
   if (data.length === 0) return null;
 
   const chunkSize = 3;
@@ -109,6 +117,12 @@ function DisplayResults({ data }: { data: DataToSend[] }) {
                       <Button
                         variant={"outline"}
                         className="inline-flex items-center rounded-lg"
+                        onClick={() => {
+                          setSelectedVid({
+                            songId: data.videoId,
+                            fileName: data.title,
+                          });
+                        }}
                       >
                         Download MP3
                         <svg
