@@ -67,7 +67,7 @@ function DisplayResults({ data }: { data: DataToSend[] }) {
               return (
                 <div
                   key={`${Math.random()}`}
-                  className="flex max-w-sm flex-col rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800"
+                  className="flex max-w-sm transform flex-col rounded-lg border border-gray-200 bg-white shadow transition duration-500 hover:z-10 hover:scale-110 dark:border-gray-700 dark:bg-gray-800"
                 >
                   <CardImage thumbnailLink={data.thumbnailLink} />
                   <div className="p-5">
