@@ -1,3 +1,4 @@
+import axios from "axios";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -49,12 +50,14 @@ function CardDescription({ description }: { description: string }) {
 
 function DisplayResults({ data }: { data: DataToSend[] }) {
   const [selectedVid, setSelectedVid] = useState({ songId: "", fileName: "" });
-  const downloadAudioQuery = api.yt.downloadAudio.useQuery(selectedVid);
 
   useEffect(() => {
     if (selectedVid.songId.length === 0) return;
-    downloadAudioQuery.refetch();
-  }, [selectedVid, downloadAudioQuery.refetch]);
+    axios.post("/api/yt", {
+      songId: selectedVid.songId,
+      fileName: selectedVid.fileName,
+    });
+  }, [selectedVid]);
 
   if (data.length === 0) return null;
 
@@ -78,8 +81,7 @@ function DisplayResults({ data }: { data: DataToSend[] }) {
                   className={`
                   flex max-w-sm transform flex-col rounded-lg border
                   border-gray-200 bg-white
-                  transition duration-500
-                  hover:z-10 hover:scale-110`}
+                  `}
                 >
                   <CardImage thumbnailLink={data.thumbnailLink} />
                   <div className="p-5">
