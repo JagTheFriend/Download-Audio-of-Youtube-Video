@@ -29,7 +29,7 @@ function DisplayResults({ data }: { data: DataToSend[] }) {
   }
 
   return (
-    <>
+    <div className="flex flex-col items-center">
       {chunkedData.map((chunk) => {
         return (
           <div key={`${Math.random()}`} className="m-1 flex flex-row gap-2">
@@ -37,11 +37,11 @@ function DisplayResults({ data }: { data: DataToSend[] }) {
               return (
                 <div
                   key={`${Math.random()}`}
-                  className="max-w-sm rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800"
+                  className="flex max-w-sm flex-col rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800"
                 >
                   <a href="/">
                     <img
-                      className="rounded-t-lg"
+                      className="w-full rounded-t-lg"
                       src={data.thumbnailLink}
                       alt="Thumbnail"
                     />
@@ -109,7 +109,7 @@ function DisplayResults({ data }: { data: DataToSend[] }) {
           </div>
         );
       })}
-    </>
+    </div>
   );
 }
 
