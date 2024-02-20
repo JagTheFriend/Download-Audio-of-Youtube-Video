@@ -2,10 +2,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import ytdl from "ytdl-core";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "POST") return;
-
-  const id: string = req.body.songId;
-  const fileName: string = req.body.fileName;
+  const id: string = req.query.songId as string;
+  const fileName: string = req.query.fileName as string;
 
   res.setHeader(
     "Content-Disposition",

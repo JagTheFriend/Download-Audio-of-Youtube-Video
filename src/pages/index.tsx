@@ -1,4 +1,3 @@
-import axios from "axios";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -49,48 +48,6 @@ function CardDescription({ description }: { description: string }) {
 }
 
 function DisplayResults({ data }: { data: DataToSend[] }) {
-  const [selectedVid, setSelectedVid] = useState({ songId: "", fileName: "" });
-
-  useEffect(() => {
-    if (selectedVid.songId.length === 0) return;
-    axios
-      .post("/api/yt", {
-        songId: selectedVid.songId,
-        fileName: selectedVid.fileName,
-      })
-      .then((response) => {
-        const binaryData = [];
-        binaryData.push(response.data);
-
-        // create file link in browser's memory
-        const href = URL.createObjectURL(
-          new Blob(binaryData, { type: "audio/mp3" }),
-        );
-
-        let fileName = "music.mp3";
-        const contentDisposition = response.headers["content-disposition"];
-
-        if (contentDisposition) {
-          // Filename sent by server
-          const receivedFileName = contentDisposition.match(/filename="(.+)"/);
-          if (receivedFileName.length === 2) {
-            fileName = receivedFileName[1];
-          }
-        }
-
-        // create "a" HTML element with href to file & click
-        const link = document.createElement("a");
-        link.href = href;
-        link.setAttribute("download", `${fileName}`);
-        document.body.appendChild(link);
-        link.click();
-
-        // clean up "a" element & remove ObjectURL
-        document.body.removeChild(link);
-        URL.revokeObjectURL(href);
-      });
-  }, [selectedVid]);
-
   if (data.length === 0) return null;
 
   const chunkSize = 3;
@@ -151,25 +108,26 @@ function DisplayResults({ data }: { data: DataToSend[] }) {
                       <Button
                         variant={"outline"}
                         className="inline-flex items-center rounded-lg"
-                        onClick={() => {
-                          setSelectedVid({
-                            songId: data.videoId,
-                            fileName: data.title,
-                          });
-                        }}
+                        asChild
                       >
-                        Download MP3
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          width={24}
-                          height={24}
-                          role="img"
-                          aria-label="download icon"
+                        <Link
+                          href={`/api/yt?songId=${data.videoId}&fileName=${data.title}`}
+                          target="_blank"
+                          rel="noreferrer"
                         >
-                          <path d="M4.75 17.25a.75.75 0 0 1 .75.75v2.25c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V18a.75.75 0 0 1 1.5 0v2.25A1.75 1.75 0 0 1 18.25 22H5.75A1.75 1.75 0 0 1 4 20.25V18a.75.75 0 0 1 .75-.75Z" />
-                          <path d="M5.22 9.97a.749.749 0 0 1 1.06 0l4.97 4.969V2.75a.75.75 0 0 1 1.5 0v12.189l4.97-4.969a.749.749 0 1 1 1.06 1.06l-6.25 6.25a.749.749 0 0 1-1.06 0l-6.25-6.25a.749.749 0 0 1 0-1.06Z" />
-                        </svg>
+                          Download MP3
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            width={24}
+                            height={24}
+                            role="img"
+                            aria-label="download icon"
+                          >
+                            <path d="M4.75 17.25a.75.75 0 0 1 .75.75v2.25c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V18a.75.75 0 0 1 1.5 0v2.25A1.75 1.75 0 0 1 18.25 22H5.75A1.75 1.75 0 0 1 4 20.25V18a.75.75 0 0 1 .75-.75Z" />
+                            <path d="M5.22 9.97a.749.749 0 0 1 1.06 0l4.97 4.969V2.75a.75.75 0 0 1 1.5 0v12.189l4.97-4.969a.749.749 0 1 1 1.06 1.06l-6.25 6.25a.749.749 0 0 1-1.06 0l-6.25-6.25a.749.749 0 0 1 0-1.06Z" />
+                          </svg>
+                        </Link>
                       </Button>
                     </div>
                   </div>
