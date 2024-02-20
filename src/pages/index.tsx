@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDebounceValue } from "usehooks-ts";
@@ -20,7 +21,13 @@ function Header() {
 
 function CardImage({ thumbnailLink }: { thumbnailLink: string }) {
   return (
-    <img className="w-full rounded-t-lg" src={thumbnailLink} alt="Thumbnail" />
+    <Image
+      className="w-full rounded-t-lg"
+      src={thumbnailLink}
+      alt="Thumbnail"
+      width={999}
+      height={999}
+    />
   );
 }
 
