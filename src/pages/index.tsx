@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDebounceValue } from "usehooks-ts";
 import LoadingSpinner from "~/components/LoadingSpinner";
@@ -14,6 +15,28 @@ function Header() {
         Download MP3 files from Youtube
       </h2>
     </div>
+  );
+}
+
+function CardImage({ thumbnailLink }: { thumbnailLink: string }) {
+  return (
+    <img className="w-full rounded-t-lg" src={thumbnailLink} alt="Thumbnail" />
+  );
+}
+
+function CardTitle({ title }: { title: string }) {
+  return (
+    <h5 className="mb-2 cursor-default text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+      {title}
+    </h5>
+  );
+}
+
+function CardDescription({ description }: { description: string }) {
+  return (
+    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+      {description}
+    </p>
   );
 }
 
@@ -39,29 +62,17 @@ function DisplayResults({ data }: { data: DataToSend[] }) {
                   key={`${Math.random()}`}
                   className="flex max-w-sm flex-col rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800"
                 >
-                  <a href="/">
-                    <img
-                      className="w-full rounded-t-lg"
-                      src={data.thumbnailLink}
-                      alt="Thumbnail"
-                    />
-                  </a>
+                  <CardImage thumbnailLink={data.thumbnailLink} />
                   <div className="p-5">
-                    <a href="/">
-                      <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        {data.title}
-                      </h5>
-                    </a>
-                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                      {data.description}
-                    </p>
+                    <CardTitle title={data.title} />
+                    <CardDescription description={data.description} />
                     <div className="flex flex-col gap-4">
                       <Button
                         variant={"outline"}
                         className="mt-2 inline-flex items-center rounded-lg"
                         asChild
                       >
-                        <a
+                        <Link
                           href={`https://www.youtube.com/watch?v=${data.videoId}`}
                           target="_blank"
                           rel="noreferrer"
@@ -82,7 +93,7 @@ function DisplayResults({ data }: { data: DataToSend[] }) {
                               d="M1 5h12m0 0L9 1m4 4L9 9"
                             />
                           </svg>
-                        </a>
+                        </Link>
                       </Button>
                       <Button
                         variant={"outline"}
